@@ -12,11 +12,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/', async (_req, res) => {
-  const usuarios = await UsuarioService.listarUsuarios();
-  res.json(usuarios);
-});
-
 router.get('/:id', async (req, res) => {
   try {
     const usuario = await UsuarioService.buscarUsuarioPorId(+req.params.id);
