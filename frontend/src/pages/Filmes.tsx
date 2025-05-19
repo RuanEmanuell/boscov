@@ -2,7 +2,7 @@ import './App.css';
 import Filme from './components/Filme';
 import NavBar from './components/NavBar';
 
-function App() {
+function Filmes() {
   return (
     <div className="bg-gray-800 min-h-screen w-full">
       <NavBar />
@@ -37,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+export default Filmes;
