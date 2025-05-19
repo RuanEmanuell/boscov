@@ -1,0 +1,26 @@
+# Ignorar dependências
+node_modules/
+
+# Ignorar arquivos de ambiente
+.env
+.env.*  # Ex: .env.local, .env.production, etc.
+
+# Ignorar logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ignorar diretórios de build temporários
+dist/
+build/
+
+# Ignorar arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de IDEs/editores
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
