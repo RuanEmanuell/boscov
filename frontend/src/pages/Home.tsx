@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Filme from '../components/Filme';
 import NavBar from '../components/NavBar';
-import { FilmeType } from '../types/Filme';
+import { FilmeType } from '../types/types';
 
 function Home() {
   const [filmes, setFilmes] = useState<FilmeType[]>([]);
@@ -44,6 +44,7 @@ function Home() {
               classificacao={filme.classificacao}
               duracao={`${filme.duracao} min`}
               produtora={filme.produtora}
+              generos={filme.generos}
             />
           ))
         ) : (
