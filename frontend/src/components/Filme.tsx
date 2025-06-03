@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../App.css';
 import { FilmeType } from '../types/Filme';
+import { X } from 'lucide-react';
 
 function Filme({ nome, anoLancamento, poster, classificacao, duracao, produtora }: FilmeType) {
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -34,10 +35,10 @@ function Filme({ nome, anoLancamento, poster, classificacao, duracao, produtora 
             onClick={(e) => e.stopPropagation()}  
           >
             <button 
-              className="absolute top-2 right-2 text-white text-2xl font-bold hover:text-red-500"
+              className="absolute top-2 right-2 text-white text-2xl font-bold hover:text-red-500 cursor-pointer"
               onClick={() => setMostrarModal(false)}
             >
-              &times;
+              <X size={28} /> 
             </button>
 
             <img 

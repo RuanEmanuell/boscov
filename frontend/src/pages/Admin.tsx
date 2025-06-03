@@ -105,7 +105,6 @@ function Admin() {
       <NavBar />
       <h1 className="font-bold text-5xl text-white text-center mt-8">Gerenciar</h1>
 
-      {/* Formulário de Filme */}
       <form onSubmit={handleSubmitFilme} className="max-w-md mx-auto mt-10 p-4 bg-gray-700 rounded-lg shadow-lg space-y-4">
         <h2 className="text-2xl font-bold text-white">Adicionar Filme</h2>
 
@@ -131,7 +130,6 @@ function Admin() {
         </button>
       </form>
 
-      {/* Formulário de Gênero */}
       <form onSubmit={handleSubmitGenero} className="max-w-md mx-auto mt-10 p-4 bg-gray-700 rounded-lg shadow-lg space-y-4">
         <h2 className="text-2xl font-bold text-white">Adicionar Gênero</h2>
 
