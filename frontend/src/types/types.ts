@@ -14,3 +14,10 @@ export interface FilmeType {
   poster: string;
   generos: number[];  
 }
+
+export interface AvaliacaoType {
+  idUsuario: number;
+  idFilme: number;
+  nota: number;
+  comentario?: string;
+}

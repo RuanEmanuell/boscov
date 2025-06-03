@@ -3,54 +3,52 @@ import { AvaliacaoService } from '../services/avaliacao.service';
 
 const router = Router();
 
-router.post('/', async (req, res) => {
+router.get('/filme/:idFilme', async (req, res) => {
+  const idFilme = +req.params.idFilme;
   try {
-    const avaliacao = await AvaliacaoService.criarAvaliacao(req.body);
-    res.json(avaliacao);
+    const avaliacoes = await AvaliacaoService.listarAvaliacoesPorFilme(idFilme);
+    res.json(avaliacoes);
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.get('/', async (_req, res) => {
-  const avaliacoes = await AvaliacaoService.listarAvaliacoes();
-  res.json(avaliacoes);
-});
+router.get('/usuario/:idUsuario/filme/:idFilme', async (req: any, res: any) => {
+  const idUsuario = +req.params.idUsuario;
+  const idFilme = +req.params.idFilme;
 
-router.get('/:idUsuario/:idFilme', async (req, res) => {
   try {
-    const avaliacao = await AvaliacaoService.buscarAvaliacao(
-      +req.params.idUsuario,
-      +req.params.idFilme
-    );
+    const avaliacao = await AvaliacaoService.buscarAvaliacaoUsuario(idUsuario, idFilme);
+    if (!avaliacao) return res.status(404).json({ error: 'Avaliação não encontrada' });
     res.json(avaliacao);
   } catch (err: any) {
-    res.status(404).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.put('/:idUsuario/:idFilme', async (req, res) => {
+router.post('/', async (req: any, res: any) => {
   try {
-    const avaliacao = await AvaliacaoService.atualizarAvaliacao(
-      +req.params.idUsuario,
-      +req.params.idFilme,
-      req.body
-    );
+    const { idUsuario, idFilme, nota, comentario } = req.body;
+    console.log(req.body)
+    if (idUsuario == null || idFilme == null || nota == null) {
+      return res.status(400).json({ error: 'idUsuario, idFilme e nota são obrigatórios' });
+    }
+    const avaliacao = await AvaliacaoService.criarOuAtualizarAvaliacao({ idUsuario, idFilme, nota, comentario });
     res.json(avaliacao);
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.delete('/:idUsuario/:idFilme', async (req, res) => {
+
+router.delete('/usuario/:idUsuario/filme/:idFilme', async (req, res) => {
+  const idUsuario = +req.params.idUsuario;
+  const idFilme = +req.params.idFilme;
   try {
-    const result = await AvaliacaoService.deletarAvaliacao(
-      +req.params.idUsuario,
-      +req.params.idFilme
-    );
-    res.json(result);
+    await AvaliacaoService.deletarAvaliacao(idUsuario, idFilme);
+    res.json({ message: 'Avaliação deletada com sucesso' });
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 

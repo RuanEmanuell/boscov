@@ -38,6 +38,7 @@ function Home() {
           filmesFiltrados.map((filme) => (
             <Filme
               key={filme.id}
+              id={filme.id}
               nome={filme.nome}
               anoLancamento={filme.anoLancamento}
               poster={filme.poster}

@@ -1,45 +1,24 @@
-import { Avaliacao } from '@prisma/client';
 import { AvaliacaoRepository } from '../repositories/avaliacao.repository';
 
 export const AvaliacaoService = {
-  async criarAvaliacao(dados: Avaliacao) {
-    const existente = await AvaliacaoRepository.buscarPorIds(dados.idUsuario, dados.idFilme);
-    if (existente) {
-      throw new Error('Avaliação já existe para esse usuário e filme');
-    }
-
-    if (dados.nota < 0 || dados.nota > 10) {
-      throw new Error('Nota deve estar entre 0 e 10');
-    }
-
-    return AvaliacaoRepository.criar(dados);
+  listarAvaliacoesPorFilme(idFilme: number) {
+    return AvaliacaoRepository.buscarPorFilme(idFilme);
   },
 
-  async buscarAvaliacao(idUsuario: number, idFilme: number) {
-    const avaliacao = await AvaliacaoRepository.buscarPorIds(idUsuario, idFilme);
-    if (!avaliacao) throw new Error('Avaliação não encontrada');
-    return avaliacao;
+  buscarAvaliacaoUsuario(idUsuario: number, idFilme: number) {
+    return AvaliacaoRepository.buscarPorUsuarioEFilme(idUsuario, idFilme);
   },
 
-  async listarAvaliacoes() {
-    return AvaliacaoRepository.listarTodos();
+  criarOuAtualizarAvaliacao(data: {
+    idUsuario: number;
+    idFilme: number;
+    nota: number;
+    comentario?: string;
+  }) {
+    return AvaliacaoRepository.criarOuAtualizarAvaliacao(data);
   },
 
-  async atualizarAvaliacao(idUsuario: number, idFilme: number, dados: Partial<Avaliacao>) {
-    const avaliacao = await AvaliacaoRepository.buscarPorIds(idUsuario, idFilme);
-    if (!avaliacao) throw new Error('Avaliação não encontrada');
-
-    if (dados.nota !== undefined && (dados.nota < 0 || dados.nota > 10)) {
-      throw new Error('Nota deve estar entre 0 e 10');
-    }
-
-    return AvaliacaoRepository.atualizar(idUsuario, idFilme, dados);
-  },
-
-  async deletarAvaliacao(idUsuario: number, idFilme: number) {
-    const avaliacao = await AvaliacaoRepository.buscarPorIds(idUsuario, idFilme);
-    if (!avaliacao) throw new Error('Avaliação não encontrada');
-    await AvaliacaoRepository.deletar(idUsuario, idFilme);
-    return { message: 'Avaliação deletada com sucesso' };
+  deletarAvaliacao(idUsuario: number, idFilme: number) {
+    return AvaliacaoRepository.deletarAvaliacao(idUsuario, idFilme);
   },
 };
