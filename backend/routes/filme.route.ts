@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
     const filme = await FilmeService.criarFilme(req.body);
     res.json(filme);
   } catch (err: any) {
-    console.error(err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -32,7 +31,6 @@ router.put('/:id', async (req, res) => {
     const filme = await FilmeService.atualizarFilme(+req.params.id, req.body);
     res.json(filme);
   } catch (err: any) {
-    console.error(err);
     res.status(400).json({ error: err.message });
   }
 });
