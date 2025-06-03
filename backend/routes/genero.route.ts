@@ -18,7 +18,6 @@ router.get('/', async (_req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  console.log("teste");
   try {
     const genero = await GeneroService.buscarGeneroPorId(+req.params.id);
     res.json(genero);

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
+import { Edit, Trash } from 'lucide-react';
 
 interface Genero {
   id: number;
@@ -194,7 +195,7 @@ function Admin() {
           ))}
         </select>
 
-        <button type="submit" className="w-full bg-gray-900 text-white font-bold py-2 rounded hover:bg-gray-500 transition cursor-pointer">
+        <button type="submit" className="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-500 transition cursor-pointer">
           {editandoFilme ? "Salvar Alterações" : "Adicionar Filme"}
         </button>
       </form>
@@ -204,8 +205,8 @@ function Admin() {
           <div key={filme.id} className="flex justify-between items-center bg-gray-700 p-2 rounded text-white">
             <span>{filme.nome}</span>
             <div className="space-x-2">
-              <button onClick={() => handleEditarFilme(filme)} className="bg-yellow-500 px-2 rounded">Editar</button>
-              <button onClick={() => handleExcluirFilme(filme.id)} className="bg-red-500 px-2 rounded">Excluir</button>
+              <button onClick={() => handleEditarFilme(filme)} className="bg-yellow-500 p-2 rounded"><Edit/></button>
+              <button onClick={() => handleExcluirFilme(filme.id)} className="bg-red-500 p-2 rounded"><Trash/></button>
             </div>
           </div>
         ))}
@@ -216,7 +217,7 @@ function Admin() {
 
         <input type="text" placeholder="Descrição do Gênero" value={descricaoGenero} onChange={(e) => setDescricaoGenero(e.target.value)} className="w-full p-2 rounded border-2 border-white text-white" required />
 
-        <button type="submit" className="w-full bg-gray-900 text-white font-bold py-2 rounded hover:bg-gray-500 transition cursor-pointer">
+        <button type="submit" className="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-500 transition cursor-pointer">
           {editandoGenero ? "Salvar Alterações" : "Adicionar Gênero"}
         </button>
       </form>
@@ -226,8 +227,8 @@ function Admin() {
           <div key={genero.id} className="flex justify-between items-center bg-gray-700 p-2 rounded text-white">
             <span>{genero.descricao}</span>
             <div className="space-x-2">
-              <button onClick={() => handleEditarGenero(genero)} className="bg-yellow-500 px-2 rounded">Editar</button>
-              <button onClick={() => handleExcluirGenero(genero.id)} className="bg-red-500 px-2 rounded">Excluir</button>
+              <button onClick={() => handleEditarGenero(genero)} className="bg-yellow-500 p-2 rounded"><Edit/></button>
+              <button onClick={() => handleExcluirGenero(genero.id)} className="bg-red-500 p-2 rounded"><Trash/></button>
             </div>
           </div>
         ))}
