@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react'; 
+import { Menu, User, X } from 'lucide-react'; 
 
 import '../App.css';
 
@@ -20,6 +20,9 @@ function NavBar() {
           </Link>
           <Link to="/admin" className="font-medium text-white hover:text-gray-300 transition">
             Gerenciar
+          </Link>
+          <Link to="/login" className="font-medium text-white hover:text-gray-300 transition">
+            <User/>
           </Link>
         </div>
 
